@@ -4,8 +4,9 @@ import {useState, useEffect} from 'react';
 
 export default function CupcakeList() {
   // Step 1: get all cupcakes
-  const [listCupcakes, setListCupCakes] = useState([""]);
-  const [accessories, setAccessories] = useState([""]);
+  const [listCupcakes, setListCupCakes] = useState([]);
+  const [accessories, setAccessories] = useState([]);
+  const [selected, setSelected] = useState("");
 
   useEffect(() => {
     axios
@@ -21,27 +22,24 @@ export default function CupcakeList() {
     .then(data => setAccessories(data));
   }, []);
 
+function handleChange(e) {
+  e.preventDefault()
+  setSelected(e.target.value)
+}
+
   return (
     <>
       <h1>My cupcakes</h1>
       <form className="center">
         <label htmlFor="cupcake-select">
           Filter by{" "}
-          <select id="cupcake-select">
-            <option value="cherry">Cherry</option>
-            <option value="donut">Donut</option>
-            <option value="chocolate">Chocolate</option>
-            <option value="wild">Wild</option>
-            <option value="christmasCandy">Christmas Candy</option>
+          <select id="cupcake-select" onChange={handleChange}>
+            <option value="">---</option>
             {/* Step 4: add an option for each accessory */}
             {accessories && accessories
-            .filter((accessories) => accessories.name === value )
            
             .map((accessories, index) => (
-              <li className="cupcake-item" >
-                <Cupcake 
-                  cupcake={cupcake.name} index={cupcake.id}/>
-              </li>
+              <option value={accessories.id} key={accessories.id}>{accessories.name}</option>
             ))
             }
 
@@ -51,10 +49,11 @@ export default function CupcakeList() {
       <ul className="cupcake-list" id="cupcake-list">
         {/* Step 2: repeat this block for each cupcake */}
           {listCupcakes && listCupcakes
+          .filter((cup) => (cup.accessory_id == selected || selected == ""))
           .map((cupcake, index) => (
-          <li className="cupcake-item" >
+          <li className="cupcake-item" key={index}>
           <Cupcake 
-            cupcake={cupcake.name} index={cupcake.id}/>
+            cupcake={cupcake} />
           </li>
           ))};
         {/* end of block */}
