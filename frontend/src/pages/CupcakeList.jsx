@@ -1,6 +1,7 @@
 import Cupcake from "@components/Cupcake";
 import axios from "axios";
 import {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 
 export default function CupcakeList() {
   // Step 1: get all cupcakes
@@ -52,8 +53,10 @@ function handleChange(e) {
           .filter((cup) => (cup.accessory_id == selected || selected == ""))
           .map((cupcake, index) => (
           <li className="cupcake-item" key={index}>
-          <Cupcake 
-            cupcake={cupcake} />
+            <Link to="/cupcakedetails">
+              <Cupcake 
+                cupcake={cupcake} />
+            </Link>
           </li>
           ))};
         {/* end of block */}
