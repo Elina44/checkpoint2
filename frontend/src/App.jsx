@@ -5,6 +5,7 @@ import CupcakeList from "@pages/CupcakeList";
 import Instructions from "@pages/Instructions";
 
 import "./App.css";
+import CupcakeDetails from "@pages/CupcakeDetails";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cupcakes" element={<CupcakeList />} />
+          <Route path="/cupcakes/:id" element={<CupcakeDetails />} />
           <Route path="/instructions" element={<Instructions />} />
         </Routes>
       </main>
