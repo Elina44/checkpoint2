@@ -39,8 +39,8 @@ function handleChange(e) {
             {/* Step 4: add an option for each accessory */}
             {accessories && accessories
            
-            .map((accessories, index) => (
-              <option value={accessories.id} key={accessories.id}>{accessories.name}</option>
+            .map((accessory, index) => (
+              <option value={accessory.id} key={accessory.id}>{accessory.name}</option>
             ))
             }
 
